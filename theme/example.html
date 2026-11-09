@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minimal Light — example</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components/bundle.css">
+  <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="components/bundle.js"></script>
+  <style>
+    body { margin: 0; min-height: 100vh; }
+    .page { padding-top: var(--space-10); padding-bottom: var(--space-10); }
+    .intro { margin: 0 0 var(--space-6); color: var(--ink-muted); }
+    .form { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-4); max-width: 400px; margin-top: var(--space-10); }
+    @container ml-screen (min-width: 768px) { .page { padding-top: var(--space-16); padding-bottom: var(--space-16); } }
+  </style>
+</head>
+<body class="ml-screen">
+  <div id="root"></div>
+  <script>
+    var M = window.MinimalLight, h = React.createElement;
+
+    function App() {
+      var dialog = React.useState(false);
+      var open = dialog[0], setOpen = dialog[1];
+      function card(title, eyebrow, text) {
+        return h(M.Card, { eyebrow: eyebrow, title: title, footer: h(M.Button, { variant: 'ghost' }, 'Open') }, text);
+      }
+      return h(React.Fragment, null,
+        h(M.NavBar, {
+          brand: 'Minimal',
+          links: [{ label: 'Home', active: true }, { label: 'Projects' }, { label: 'Reports' }, { label: 'Settings' }],
+          action: h(M.Button, { onClick: function () { setOpen(true); } }, 'New project')
+        }),
+        h('main', { className: 'ml-container page' },
+          h('h1', { className: 'h1' }, 'Home'),
+          h('p', { className: 'body intro' }, 'Resize the window: the layout changes at 768px and 1024px.'),
+          h(M.CardGrid, null,
+            card('Weekly report', 'Updated today', 'Visits are up 12% on last week.'),
+            card('Team', '4 members', 'Invite people to share this space.'),
+            card('Billing', 'Free plan', 'Upgrade any time for more storage.')),
+          h('form', { className: 'form', onSubmit: function (e) { e.preventDefault(); } },
+            h('h2', { className: 'h2' }, 'Sign in'),
+            h(M.Input, { label: 'Email', type: 'email', placeholder: 'you@example.com', hint: 'We never share your email.' }),
+            h(M.Input, { label: 'Password', type: 'password' }),
+            h(M.Button, { type: 'submit', block: 'mobile' }, 'Sign in'))),
+        h(M.Dialog, {
+          open: open,
+          onClose: function () { setOpen(false); },
+          title: 'Create project?',
+          actions: h(React.Fragment, null,
+            h(M.Button, { variant: 'secondary', onClick: function () { setOpen(false); } }, 'Cancel'),
+            h(M.Button, { onClick: function () { setOpen(false); } }, 'Create'))
+        }, h('p', null, 'You can rename it later.')));
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+  </script>
+</body>
+</html>

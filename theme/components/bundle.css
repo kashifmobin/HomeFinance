@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+/* Minimal Light components. Mobile-first base styles; wider layouts come from
+   container queries on the nearest .ml-screen (put it on <body> or your app root). */
+
+.ml-screen { container: ml-screen / inline-size; font-family: var(--font-sans); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
+.ml-screen *, .ml-screen *::before, .ml-screen *::after { box-sizing: border-box; }
+
+.ml-container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--gutter-mobile); }
+@container ml-screen (min-width: 768px) { .ml-container { padding: 0 var(--gutter-tablet); } }
+@container ml-screen (min-width: 1024px) { .ml-container { padding: 0 var(--gutter-desktop); } }
+
+/* Button */
+.ml-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); border: 1px solid transparent; border-radius: var(--radius-md); font: 500 14px/20px var(--font-sans); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .15s, border-color .15s; }
+.ml-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ml-btn:disabled, .ml-btn[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+.ml-btn-primary { background: var(--accent); color: var(--on-accent); }
+.ml-btn-primary:hover:not(:disabled) { background-image: linear-gradient(rgba(28, 28, 26, .12), rgba(28, 28, 26, .12)); }
+.ml-btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--border-control); }
+.ml-btn-secondary:hover:not(:disabled) { background: var(--surface-sunken); }
+.ml-btn-ghost { background: transparent; color: var(--accent); }
+.ml-btn-ghost:hover:not(:disabled) { background: var(--accent-soft); }
+.ml-btn-danger { background: var(--danger); color: var(--on-accent); }
+.ml-btn-danger:hover:not(:disabled) { background-image: linear-gradient(rgba(28, 28, 26, .12), rgba(28, 28, 26, .12)); }
+.ml-btn-block, .ml-btn-block-mobile { width: 100%; }
+@container ml-screen (min-width: 768px) { .ml-btn-block-mobile { width: auto; } }
+@container ml-screen (min-width: 1024px) { .ml-btn { min-height: 40px; } }
+
+/* Input */
+.ml-field { display: flex; flex-direction: column; gap: var(--space-2); width: 100%; }
+.ml-label { font: 500 14px/20px var(--font-sans); color: var(--ink); }
+.ml-input { width: 100%; min-height: 44px; padding: 0 calc(var(--space-4) - var(--space-1)); background: var(--surface); color: var(--ink); border: 1px solid var(--border-control); border-radius: var(--radius-md); font: 400 16px/24px var(--font-sans); }
+.ml-input::placeholder { color: var(--ink-muted); }
+.ml-input:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+.ml-input:disabled { background: var(--surface-sunken); cursor: not-allowed; }
+.ml-hint { margin: 0; font: 400 14px/20px var(--font-sans); color: var(--ink-muted); }
+.ml-field-error .ml-input { border-color: var(--danger); }
+.ml-field-error .ml-input:focus { outline-color: var(--danger); }
+.ml-field-error .ml-hint { color: var(--danger); }
+@container ml-screen (min-width: 1024px) { .ml-input { min-height: 40px; } }
+
+/* Card */
+.ml-card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-4); }
+.ml-card-eyebrow { margin: 0 0 var(--space-1); font: 500 12px/16px var(--font-sans); letter-spacing: .02em; color: var(--ink-muted); }
+.ml-card-title { margin: 0 0 var(--space-2); font: 600 18px/26px var(--font-sans); color: var(--ink); }
+.ml-card-body { font: 400 16px/24px var(--font-sans); color: var(--ink-muted); }
+.ml-card-body > :first-child { margin-top: 0; }
+.ml-card-body > :last-child { margin-bottom: 0; }
+.ml-card-footer { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: auto; padding-top: var(--space-4); }
+.ml-card-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+@container ml-screen (min-width: 768px) {
+  .ml-card { padding: var(--space-6); }
+  .ml-card-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+}
+@container ml-screen (min-width: 1024px) {
+  .ml-card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .ml-card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* NavBar */
+.ml-nav { background: var(--surface); border-bottom: 1px solid var(--border); font-family: var(--font-sans); }
+.ml-nav-bar { display: flex; align-items: center; gap: var(--space-6); max-width: var(--container-max); height: 56px; margin: 0 auto; padding: 0 var(--gutter-mobile); }
+.ml-nav-brand { font: 600 18px/26px var(--font-sans); color: var(--ink); text-decoration: none; }
+.ml-nav-links, .ml-nav-action { display: none; }
+.ml-nav-toggle { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 0 calc(var(--space-2) * -1) 0 auto; padding: 0; background: transparent; border: 0; border-radius: var(--radius-md); color: var(--ink); cursor: pointer; }
+.ml-nav-toggle:hover { background: var(--surface-sunken); }
+.ml-nav-link { display: inline-flex; align-items: center; min-height: 40px; padding: 0 calc(var(--space-4) - var(--space-1)); border-radius: var(--radius-md); font: 500 14px/20px var(--font-sans); color: var(--ink-muted); text-decoration: none; }
+.ml-nav-link:hover { color: var(--ink); background: var(--surface-sunken); }
+.ml-nav-link[aria-current="page"] { color: var(--accent); background: var(--accent-soft); }
+.ml-nav-link:focus-visible, .ml-nav-brand:focus-visible, .ml-nav-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ml-nav-panel { border-top: 1px solid var(--border); padding: var(--space-2) var(--gutter-mobile) var(--space-4); }
+.ml-nav-panel nav { display: flex; flex-direction: column; }
+.ml-nav-panel-link { min-height: 48px; font-size: 16px; line-height: 24px; padding: 0 var(--space-2); }
+.ml-nav-panel-action { display: flex; flex-direction: column; gap: var(--space-2); padding-top: var(--space-4); }
+.ml-nav-panel-action .ml-btn { width: 100%; }
+@container ml-screen (min-width: 768px) {
+  .ml-nav-bar { height: 64px; padding: 0 var(--gutter-tablet); }
+  .ml-nav-links { display: flex; gap: var(--space-1); }
+  .ml-nav-action { display: flex; gap: var(--space-2); margin-left: auto; }
+  .ml-nav-toggle, .ml-nav-panel { display: none; }
+}
+@container ml-screen (min-width: 1024px) { .ml-nav-bar { padding: 0 var(--gutter-desktop); } }
+
+/* Dialog */
+.ml-dialog-scrim { position: fixed; inset: 0; z-index: 100; display: flex; align-items: flex-end; justify-content: center; background: var(--scrim); }
+.ml-dialog { width: 100%; max-height: 90%; overflow: auto; background: var(--surface); border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: var(--shadow-float); padding: var(--space-2) var(--gutter-mobile) calc(var(--space-6) + env(safe-area-inset-bottom, 0px)); font-family: var(--font-sans); outline: none; }
+.ml-dialog-handle { width: 36px; height: 4px; margin: 0 auto var(--space-2); border-radius: var(--radius-sm); background: var(--border); }
+.ml-dialog-head { display: flex; align-items: center; gap: var(--space-2); min-height: 44px; }
+.ml-dialog-title { flex: 1; margin: 0; font: 600 18px/26px var(--font-sans); color: var(--ink); }
+.ml-dialog-close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-right: calc(var(--space-2) * -1); padding: 0; background: transparent; border: 0; border-radius: var(--radius-md); color: var(--ink-muted); cursor: pointer; }
+.ml-dialog-close:hover { background: var(--surface-sunken); color: var(--ink); }
+.ml-dialog-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ml-dialog-body { margin-top: var(--space-2); font: 400 16px/24px var(--font-sans); color: var(--ink-muted); }
+.ml-dialog-body > :first-child { margin-top: 0; }
+.ml-dialog-body > :last-child { margin-bottom: 0; }
+.ml-dialog-actions { display: flex; flex-direction: column-reverse; gap: var(--space-2); margin-top: var(--space-6); }
+.ml-dialog-actions .ml-btn { width: 100%; }
+@container ml-screen (min-width: 768px) {
+  .ml-dialog-scrim { align-items: center; padding: var(--gutter-tablet); }
+  .ml-dialog { max-width: 560px; border-radius: var(--radius-lg); padding: var(--space-6); }
+  .ml-dialog-handle { display: none; }
+  .ml-dialog-actions { flex-direction: row; justify-content: flex-end; }
+  .ml-dialog-actions .ml-btn { width: auto; }
+}
